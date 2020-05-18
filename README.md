@@ -21,7 +21,7 @@ Applications have two properties we will need to configure the sandbox:
 
 To configure the sandbox, simply edit the .env file in the front-react folder:
 
-```
+```env
 REACT_APP_AUTH0_DOMAIN=<Your app domain (tenant)>
 REACT_APP_AUTH0_CLIENT_ID=<Your app client id>
 REACT_APP_AUTH0_CALLBACK_URL=http://localhost:3000/callback
@@ -33,7 +33,7 @@ REACT_APP_API_URL=http://localhost:3001
 
 You can launch both the dev api and the react frontend by going into the front-react folder and type a good old:
 
-```
+```cl
 npm start
 ```
 
