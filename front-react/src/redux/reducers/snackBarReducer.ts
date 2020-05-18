@@ -8,7 +8,7 @@ import { initialState } from "../store/root.state";
 import { CustomSnackbarData } from "../../components/generic/CustomSnackbar";
 
 const snackBarReducer = (
-  state: CustomSnackbarData | null = initialState.snackBar,
+  state: CustomSnackbarData = initialState.snackBar,
   action: ActionWithPayload<string, CustomSnackbarData | null>
 ) => {
   switch (action.type) {
