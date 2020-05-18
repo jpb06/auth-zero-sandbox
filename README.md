@@ -39,4 +39,4 @@ npm start
 
 ## Demo
 
-![Use case](https://i.imgur.com/MZPh8GN.png)
+<img src="https://i.imgur.com/MZPh8GN.png" />
