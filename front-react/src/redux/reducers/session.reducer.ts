@@ -7,7 +7,9 @@ const sessionReducer = (
   state: Session | null = initialState.session,
   action: ActionWithPayload<string, Session | null>
 ) => {
-  if (action.type === LOGGED_IN) return action.payload as Session;
+  if (action.type === LOGGED_IN) {
+    return action.payload as Session;
+  }
 
   return state;
 };
