@@ -1,7 +1,6 @@
 import AuthLogic from "../../logic/auth.logic";
 import { ReduxDispatch } from "../../hooks/redux.hooks";
 import { ThunkResult } from "../../types/redux/thunk.result";
-import { clearSession } from "../../logic/session.logic";
 import { notice } from "./generic.actions";
 import { CLEAR_SESSION } from "../../types/redux/action.types";
 
@@ -10,7 +9,6 @@ const logoutAction = (): ThunkResult<void> => (dispatch: ReduxDispatch) => {
     clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
     returnTo: "http://localhost:3000",
   });
-  clearSession();
   dispatch(notice(CLEAR_SESSION));
 };
 
