@@ -19,8 +19,8 @@ export default class AuthLogic {
     AuthLogic.Instance.authorize();
   };
 
-  static handleAuthentication = async (): Promise<AuthResult> => {
-    return new Promise<AuthResult>((resolve, reject) => {
+  static handleAuthentication = async (): Promise<AuthResult> =>
+    new Promise<AuthResult>((resolve, reject) => {
       // resolve({ error: "something bad occured." });
 
       AuthLogic.Instance.parseHash((err, authResult) => {
@@ -46,7 +46,19 @@ export default class AuthLogic {
         }
       });
     });
-  };
+
+  static renewToken = async () =>
+    new Promise<AuthResult>((resolve, reject) => {
+      AuthLogic.Instance.checkSession({}, (err, result) => {
+        if (err) {
+          const description = `Error: ${err.error} - ${err.errorDescription}`;
+          console.log(description);
+          reject(description);
+        } else {
+          resolve(result);
+        }
+      });
+    });
 
   static getUserProfile = async (
     session: Session

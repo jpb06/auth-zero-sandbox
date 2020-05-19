@@ -5,7 +5,6 @@ import { appBusyAction, appAvailableAction } from "./app.status.actions";
 import { LOGGED_IN } from "../../types/redux/action.types";
 import { action } from "./generic.actions";
 import { AuthResult } from "../../types/auth.result";
-import { persistSession } from "../../logic/session.logic";
 import { AppStatus } from "../store/root.state";
 import { snackBarAction } from "./snackBar.action";
 import { SnackbarType } from "../../components/generic/CustomSnackbar";
@@ -27,14 +26,13 @@ const loginAction = (location: string): ThunkResult<Promise<boolean>> => async (
       new Promise<AuthResult>((resolve) => setTimeout(() => resolve(x), 1500))
   );
   if (result.session) {
-    persistSession(result.session);
     dispatch(action(LOGGED_IN, result.session));
   } else if (result.error) {
     dispatch(snackBarAction(SnackbarType.error, result.error));
   }
 
   dispatch(appAvailableAction());
-  return false;
+  return true;
 };
 
 export default loginAction;

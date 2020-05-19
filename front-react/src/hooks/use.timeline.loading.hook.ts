@@ -10,7 +10,7 @@ const useTimelineLoading = (): Array<Repo> => {
 
   useEffect(() => {
     if (timeline.length === 0 && session) {
-      dispatch(getTimelineAction());
+      dispatch(getTimelineAction(session));
     }
   }, [dispatch, session, timeline]);
 

@@ -1,4 +1,3 @@
-import { recoverSession } from "../../logic/session.logic";
 import { Session } from "../../types/session.type";
 import { UserProfile } from "../../types/user.profile";
 import { Repo } from "../../types/repo.type";
@@ -31,7 +30,7 @@ export const initialState: RootState = {
     type: SnackbarType.error,
     text: "",
   },
-  session: recoverSession(),
+  session: null,
   userProfile: null,
   timeline: [],
 };
