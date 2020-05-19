@@ -34,6 +34,7 @@ export default class AuthLogic {
             ? authResult.expiresIn * 1000 + date
             : date;
 
+          AuthLogic.scheduleTokenRenewal(expiresAt);
           resolve({
             session: {
               idToken: authResult.idToken,
@@ -59,6 +60,15 @@ export default class AuthLogic {
         }
       });
     });
+
+  static scheduleTokenRenewal = (expiresAt: number) => {
+    const delay = expiresAt - Date.now();
+    if (delay > 0) {
+      setTimeout(() => {
+        AuthLogic.renewToken();
+      }, delay);
+    }
+  };
 
   static getUserProfile = async (
     session: Session
