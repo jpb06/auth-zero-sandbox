@@ -5,6 +5,7 @@ import { AppStatus } from "../store/root.state";
 import { apiGet } from "../../logic/api.util";
 import { snackBarAction } from "./snackBar.action";
 import { SnackbarType } from "../../components/generic/CustomSnackbar";
+import { Session } from "../../types/session.type";
 
 export enum ApiRestriction {
   Scope,
@@ -28,14 +29,15 @@ const getRouteFor = (guard: ApiRestriction) => {
 };
 
 const restrictedCallAction = (
-  guard: ApiRestriction
+  guard: ApiRestriction,
+  session: Session
 ): ThunkResult<Promise<boolean>> => async (dispatch: ReduxDispatch) => {
   dispatch(appBusyAction(AppStatus.BusyMakingRestrictedApiCalls));
 
   let outcome = false;
 
   try {
-    const result = await apiGet(getRouteFor(guard));
+    const result = await apiGet(getRouteFor(guard), session.accessToken);
     if (result.ok) {
       outcome = true;
       dispatch(snackBarAction(SnackbarType.success, await result.text()));

@@ -13,7 +13,7 @@ const LoginContainer = () => {
     let text = "";
 
     try {
-      const result = await apiGet("private");
+      const result = await apiGet("private", null);
 
       if (result.ok) {
         type = SnackbarType.success;

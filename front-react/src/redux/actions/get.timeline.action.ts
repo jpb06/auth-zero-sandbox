@@ -6,14 +6,18 @@ import { GET_TIMELINE } from "../../types/redux/action.types";
 import { apiGet } from "../../logic/api.util";
 import { snackBarAction } from "./snackBar.action";
 import { SnackbarType } from "../../components/generic/CustomSnackbar";
+import { appBusyAction } from "./app.status.actions";
+import { AppStatus } from "../store/root.state";
+import { Session } from "../../types/session.type";
 
-const getTimelineAction = (): ThunkResult<Promise<Array<Repo>>> => async (
-  dispatch: ReduxDispatch
-) => {
+const getTimelineAction = (
+  session: Session
+): ThunkResult<Promise<Array<Repo>>> => async (dispatch: ReduxDispatch) => {
+  dispatch(appBusyAction(AppStatus.BusyRetrievingTimeline));
   let timeline: Array<Repo> = [];
 
   try {
-    const result = await apiGet("timeline");
+    const result = await apiGet("timeline", session.accessToken);
 
     if (result.ok) {
       timeline = (await result.json()) as Array<Repo>;
@@ -25,6 +29,7 @@ const getTimelineAction = (): ThunkResult<Promise<Array<Repo>>> => async (
     dispatch(snackBarAction(SnackbarType.error, err.message));
   }
 
+  dispatch(appBusyAction(AppStatus.Available));
   return timeline;
 };
 

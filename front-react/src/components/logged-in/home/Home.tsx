@@ -24,6 +24,7 @@ import restrictedCallAction, {
 import BlockIcon from "@material-ui/icons/Block";
 import CancelIcon from "@material-ui/icons/Cancel";
 import { AppStatus } from "../../../redux/store/root.state";
+import { Session } from "../../../types/session.type";
 
 const Home = () => {
   const classes = styles();
@@ -31,11 +32,12 @@ const Home = () => {
   const isBusy = useReduxSelector(
     (state) => state.appStatus !== AppStatus.Available
   );
+  const session = useReduxSelector((state) => state.session);
 
   const handleScopeRestrictedCall = () =>
-    dispatch(restrictedCallAction(ApiRestriction.Scope));
+    dispatch(restrictedCallAction(ApiRestriction.Scope, session as Session));
   const handleRoleRestrictedCall = () =>
-    dispatch(restrictedCallAction(ApiRestriction.Role));
+    dispatch(restrictedCallAction(ApiRestriction.Role, session as Session));
 
   return (
     <>
