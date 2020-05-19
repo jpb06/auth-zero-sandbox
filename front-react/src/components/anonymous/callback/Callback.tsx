@@ -10,12 +10,16 @@ const Callback = () => {
   const history = useHistory();
 
   useEffect(() => {
-    const result = dispatch(loginAction(location.hash));
-    if (result) {
-      history.push("/home");
-    } else {
-      history.push("/error");
-    }
+    const login = async () => {
+      const result = await dispatch(loginAction(location.hash));
+      if (result) {
+        history.push("/home");
+      } else {
+        history.push("/error");
+      }
+    };
+
+    login();
   }, [dispatch, location.hash, history]);
 
   return <Busy text="Login in progress... Please wait" />;
