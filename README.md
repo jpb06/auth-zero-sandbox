@@ -29,6 +29,15 @@ REACT_APP_AUTH0_AUDIENCE=http://localhost:3001
 REACT_APP_API_URL=http://localhost:3001
 ```
 
+### Auth0 settings
+
+#### Application settings
+
+- Type : SPA
+- Allowed Callback URLs : http://localhost:3000/callback
+- Allowed Logout URLs : http://localhost:3000
+- Allowed Web Origins : http://localhost:3000
+
 ## Launch
 
 You can launch both the dev api and the react frontend by going into the front-react folder and type a good old:
